@@ -86,6 +86,7 @@ Change it under Admin > Users after logging in, or edit `database/seeders/Databa
 ## Customizing
 
 - Site name, tagline and posts per page: Admin > Settings
+- Site logo and favicon (uploaded, shown in the header and browser tab): Admin > Settings
 - SEO defaults (description, keywords, share image, robots directive, Google/Bing verification): Admin > Settings > SEO
 - Blog title in the browser tab: `APP_NAME` in `.env`
 
