@@ -29,11 +29,11 @@
                     >
                 @else
                     <div class="brand-mark">{{ strtoupper(substr(config('app.name', 'DML Blog'), 0, 1)) }}</div>
+                    <div>
+                        <div class="brand-name">{{ config('app.name', 'DML Blog') }}</div>
+                        <div class="brand-caption">Admin Panel</div>
+                    </div>
                 @endif
-                <div>
-                    <div class="brand-name">{{ config('app.name', 'DML Blog') }}</div>
-                    <div class="brand-caption">Admin Panel</div>
-                </div>
             </a>
 
             <nav class="admin-nav">
