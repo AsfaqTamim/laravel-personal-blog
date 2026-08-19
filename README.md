@@ -59,7 +59,7 @@ Visitor analytics:
 ## Installation
 
 ```bash
-git clone https://github.com/yourname/laravel-personal-blog.git
+git clone https://github.com/arfat-web/laravel-personal-blog.git
 cd laravel-personal-blog
 composer install
 cp .env.example .env
