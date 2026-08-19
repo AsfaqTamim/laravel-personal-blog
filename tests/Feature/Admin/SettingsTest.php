@@ -6,6 +6,8 @@ use App\Models\Post;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class SettingsTest extends TestCase
@@ -39,6 +41,73 @@ class SettingsTest extends TestCase
         $this->get(route('blog.index'))
             ->assertOk()
             ->assertSee('Custom Blog Name');
+    }
+
+    public function test_admin_can_upload_logo_and_favicon(): void
+    {
+        Storage::fake('public');
+
+        $this->actingAs($this->admin())
+            ->put(route('admin.settings.update'), [
+                'site_name' => 'My Blog',
+                'posts_per_page' => 6,
+                'site_logo' => UploadedFile::fake()->image('logo.png', 200, 80),
+                'site_favicon' => UploadedFile::fake()->image('favicon.png', 32, 32),
+            ])
+            ->assertRedirect(route('admin.settings.index'));
+
+        $logo = Setting::get('site_logo');
+        $favicon = Setting::get('site_favicon');
+
+        $this->assertNotNull($logo);
+        $this->assertNotNull($favicon);
+        Storage::disk('public')->assertExists($logo);
+        Storage::disk('public')->assertExists($favicon);
+    }
+
+    public function test_replacing_logo_removes_the_old_file(): void
+    {
+        Storage::fake('public');
+
+        $this->actingAs($this->admin())
+            ->put(route('admin.settings.update'), [
+                'site_name' => 'My Blog',
+                'posts_per_page' => 6,
+                'site_logo' => UploadedFile::fake()->image('first.png', 200, 80),
+            ])
+            ->assertRedirect(route('admin.settings.index'));
+
+        $first = Setting::get('site_logo');
+        Storage::disk('public')->assertExists($first);
+
+        $this->actingAs($this->admin())
+            ->put(route('admin.settings.update'), [
+                'site_name' => 'My Blog',
+                'posts_per_page' => 6,
+                'site_logo' => UploadedFile::fake()->image('second.png', 220, 90),
+            ])
+            ->assertRedirect(route('admin.settings.index'));
+
+        $second = Setting::get('site_logo');
+
+        $this->assertNotSame($first, $second);
+        Storage::disk('public')->assertMissing($first);
+        Storage::disk('public')->assertExists($second);
+    }
+
+    public function test_logo_and_favicon_are_used_on_the_public_site(): void
+    {
+        Storage::fake('public');
+        Storage::disk('public')->put('site/logo.png', 'fake-image');
+        Storage::disk('public')->put('site/favicon.png', 'fake-image');
+
+        Setting::set('site_logo', 'site/logo.png');
+        Setting::set('site_favicon', 'site/favicon.png');
+
+        $this->get(route('blog.index'))
+            ->assertOk()
+            ->assertSee('storage/site/logo.png', false)
+            ->assertSee('<link rel="icon" href="/storage/site/favicon.png">', false);
     }
 
     public function test_admin_can_update_seo_settings(): void
