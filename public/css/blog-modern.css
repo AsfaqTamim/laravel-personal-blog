@@ -1964,6 +1964,27 @@ textarea.form-input {
     }
 }
 
+/* ============================== Brand images ============================== */
+
+.masthead-logo {
+    height: 44px;
+    width: auto;
+    display: block;
+}
+
+.footer-logo {
+    height: 32px;
+    width: auto;
+    display: block;
+    flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+    .masthead-logo {
+        height: 34px;
+    }
+}
+
 /* ============================== Most Read ============================== */
 
 .most-read-grid {

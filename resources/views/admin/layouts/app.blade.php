@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <title>@yield('title', 'Admin') — {{ config('app.name', 'DML Blog') }}</title>
+    @php($siteFavicon = trim((string) blog_setting('site_favicon')))
+    @if ($siteFavicon)
+        <link rel="icon" href="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($siteFavicon) }}">
+    @else
+        <link rel="icon" href="{{ asset('favicon.ico') }}">
+    @endif
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     @stack('styles')
@@ -14,7 +20,16 @@
         {{-- Sidebar --}}
         <aside class="admin-sidebar">
             <a href="{{ route('admin.dashboard') }}" class="sidebar-brand">
-                <div class="brand-mark">{{ strtoupper(substr(config('app.name', 'DML Blog'), 0, 1)) }}</div>
+                @php($siteLogo = trim((string) blog_setting('site_logo')))
+                @if ($siteLogo)
+                    <img
+                        src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($siteLogo) }}"
+                        alt=""
+                        class="brand-logo"
+                    >
+                @else
+                    <div class="brand-mark">{{ strtoupper(substr(config('app.name', 'DML Blog'), 0, 1)) }}</div>
+                @endif
                 <div>
                     <div class="brand-name">{{ config('app.name', 'DML Blog') }}</div>
                     <div class="brand-caption">Admin Panel</div>

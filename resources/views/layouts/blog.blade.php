@@ -11,12 +11,19 @@
 @php($defaultRobots = trim((string) blog_setting('seo_robots')) ?: 'index, follow')
 @php($googleVerification = trim((string) blog_setting('google_site_verification')))
 @php($bingVerification = trim((string) blog_setting('bing_site_verification')))
+@php($siteLogo = trim((string) blog_setting('site_logo')))
+@php($siteFavicon = trim((string) blog_setting('site_favicon')))
 @php($canonical = url()->current())
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $seoTitle }}</title>
+    @if ($siteFavicon)
+        <link rel="icon" href="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($siteFavicon) }}">
+    @else
+        <link rel="icon" href="{{ asset('favicon.ico') }}">
+    @endif
     <meta name="description" content="{{ $seoDescription }}">
     @if ($noindex)
         <meta name="robots" content="noindex, follow">
@@ -89,7 +96,17 @@
             </div>
 
             <div class="masthead-row">
-                <a href="{{ route('blog.index') }}" class="masthead-brand">{{ $siteName }}</a>
+                <a href="{{ route('blog.index') }}" class="masthead-brand">
+                    @if ($siteLogo)
+                        <img
+                            src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($siteLogo) }}"
+                            alt="{{ $siteName }}"
+                            class="masthead-logo"
+                        >
+                    @else
+                        {{ $siteName }}
+                    @endif
+                </a>
 
                 <button type="button" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
                     <i class="fa-solid fa-bars" aria-hidden="true"></i>
@@ -122,7 +139,15 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="brand-row">
-                        <span class="brand-mark">{{ strtoupper(substr($siteName, 0, 1)) }}</span>
+                        @if ($siteLogo)
+                            <img
+                                src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($siteLogo) }}"
+                                alt="{{ $siteName }}"
+                                class="footer-logo"
+                            >
+                        @else
+                            <span class="brand-mark">{{ strtoupper(substr($siteName, 0, 1)) }}</span>
+                        @endif
                         {{ $siteName }}
                     </div>
                     <p>Articles, stories and insights on all kinds of topics — tech, life and everything in between. Written by humans, for humans.</p>

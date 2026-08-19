@@ -36,7 +36,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('admin.settings.update') }}">
+            <form method="POST" action="{{ route('admin.settings.update') }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -77,6 +77,34 @@
                         max="50"
                         required
                     >
+                </div>
+
+                <div class="form-field">
+                    <label for="site_logo">Site Logo <small>(shown in the header — PNG/JPG/SVG/WebP, optional)</small></label>
+                    <input type="file" id="site_logo" name="site_logo" class="file-input" accept="image/*">
+                    @if (! empty($settings['site_logo']))
+                        <div class="image-preview">
+                            <img
+                                src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($settings['site_logo']) }}"
+                                alt="Current logo"
+                                style="max-height: 70px;"
+                            >
+                        </div>
+                    @endif
+                </div>
+
+                <div class="form-field">
+                    <label for="site_favicon">Favicon <small>(browser tab icon — ICO/PNG, optional)</small></label>
+                    <input type="file" id="site_favicon" name="site_favicon" class="file-input" accept=".ico,.png,.jpg,.jpeg,.svg,.webp">
+                    @if (! empty($settings['site_favicon']))
+                        <div class="image-preview">
+                            <img
+                                src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($settings['site_favicon']) }}"
+                                alt="Current favicon"
+                                style="max-height: 32px;"
+                            >
+                        </div>
+                    @endif
                 </div>
 
                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Settings</button>
