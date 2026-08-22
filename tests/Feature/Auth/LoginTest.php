@@ -26,11 +26,11 @@ class LoginTest extends TestCase
     public function test_users_can_login_and_reach_the_dashboard(): void
     {
         $user = User::factory()->create([
-            'email' => 'admin@dml-blog.test',
+            'email' => 'admin@blog.test',
         ]);
 
         $this->post(route('login.store'), [
-            'email' => 'admin@dml-blog.test',
+            'email' => 'admin@blog.test',
             'password' => 'password',
         ])->assertRedirect(route('admin.dashboard'));
 
@@ -44,11 +44,11 @@ class LoginTest extends TestCase
     public function test_users_cannot_login_with_wrong_credentials(): void
     {
         User::factory()->create([
-            'email' => 'admin@dml-blog.test',
+            'email' => 'admin@blog.test',
         ]);
 
         $this->post(route('login.store'), [
-            'email' => 'admin@dml-blog.test',
+            'email' => 'admin@blog.test',
             'password' => 'wrong-password',
         ])->assertSessionHasErrors('email');
 

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
-    <title>@yield('title', 'Admin') — {{ config('app.name', 'DML Blog') }}</title>
+    <title>@yield('title', 'Admin') — {{ config('app.name', 'Clara Dawson') }}</title>
     @php($siteFavicon = trim((string) blog_setting('site_favicon')))
     @if ($siteFavicon)
         <link rel="icon" href="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($siteFavicon) }}">
@@ -28,9 +28,9 @@
                         class="brand-logo"
                     >
                 @else
-                    <div class="brand-mark">{{ strtoupper(substr(config('app.name', 'DML Blog'), 0, 1)) }}</div>
+                    <div class="brand-mark">{{ strtoupper(substr(config('app.name', 'Clara Dawson'), 0, 1)) }}</div>
                     <div>
-                        <div class="brand-name">{{ config('app.name', 'DML Blog') }}</div>
+                        <div class="brand-name">{{ config('app.name', 'Clara Dawson') }}</div>
                         <div class="brand-caption">Admin Panel</div>
                     </div>
                 @endif

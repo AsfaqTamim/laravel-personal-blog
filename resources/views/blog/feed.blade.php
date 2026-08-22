@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-    <title>{{ config('app.name', 'DML Blog') }}</title>
+    <title>{{ config('app.name', 'Clara Dawson') }}</title>
     <link>{{ route('blog.index') }}</link>
-    <description>Latest articles from {{ config('app.name', 'DML Blog') }}</description>
+    <description>Latest articles from {{ config('app.name', 'Clara Dawson') }}</description>
     <language>en</language>
     <lastBuildDate>{{ now()->toRfc2822String() }}</lastBuildDate>
     <atom:link href="{{ route('blog.feed') }}" rel="self" type="application/rss+xml" />

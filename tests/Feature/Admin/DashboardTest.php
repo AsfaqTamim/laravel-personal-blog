@@ -14,7 +14,7 @@ class DashboardTest extends TestCase
 
     protected function admin(): User
     {
-        return User::factory()->create(['email' => 'admin@dml-blog.test']);
+        return User::factory()->create(['email' => 'admin@blog.test']);
     }
 
     public function test_dashboard_shows_recent_posts_and_pending_comments(): void

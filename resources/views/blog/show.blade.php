@@ -22,8 +22,8 @@
             "url": {!! json_ld(url('/')) !!}
         },
         "publisher": {
-            "@@type": "Organization",
-            "name": {!! json_ld(blog_setting('site_name', config('app.name', 'Clara Dawson Blogs'))) !!},
+            "@@type": "Person",
+            "name": {!! json_ld(blog_setting('site_name', config('app.name', 'Clara Dawson'))) !!},
             "url": {!! json_ld(url('/')) !!}
         },
         "datePublished": {!! json_ld(optional($post->published_at)->toIso8601String()) !!},

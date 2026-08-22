@@ -19,7 +19,7 @@ class TagAndViewsTest extends TestCase
 
     private function admin(): User
     {
-        return User::factory()->create(['email' => 'admin@dml-blog.test']);
+        return User::factory()->create(['email' => 'admin@blog.test']);
     }
 
     public function test_post_views_increment_for_human_visitors(): void

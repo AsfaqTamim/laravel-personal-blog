@@ -2,7 +2,7 @@
 
 A complete Laravel blog with custom admin panel, SEO, tags, post views and visitor analytics — built from scratch, no packages.
 
-This codebase powers **Clara Dawson Blogs**, a single-author newspaper-style blog. One install gives you the public site, the admin panel and analytics.
+This codebase powers **Clara Dawson**, a single-author personal blog. One install gives you the public site, the admin panel and analytics.
 
 ## What's included
 
@@ -78,7 +78,7 @@ Open http://127.0.0.1:8000. The seeder creates the admin user, sample posts, cat
 
 ## Default login
 
-- Email: `admin@dml-blog.test`
+- Email: `admin@blog.test`
 - Password: `password`
 
 Change it under Admin > Users after logging in, or edit `database/seeders/DatabaseSeeder.php`.

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-@php($siteName = blog_setting('site_name', config('app.name', 'Clara Dawson Blogs')))
+@php($siteName = blog_setting('site_name', config('app.name', 'Clara Dawson')))
 @php($siteTagline = blog_setting('site_tagline', 'Stories, ideas & insights on all kinds of topics'))
 @php($pageTitle = trim((string) $__env->yieldContent('title')))
 @php($seoTitle = $pageTitle !== '' ? $pageTitle.' — '.$siteName : $siteName.' — '.$siteTagline)

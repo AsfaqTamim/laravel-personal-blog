@@ -18,7 +18,7 @@ class SettingsController extends Controller
     public function index(): View
     {
         $settings = [
-            'site_name' => Setting::get('site_name', config('app.name', 'Clara Dawson Blogs')),
+            'site_name' => Setting::get('site_name', config('app.name', 'Clara Dawson')),
             'site_tagline' => Setting::get('site_tagline', 'Stories, ideas & insights on all kinds of topics'),
             'posts_per_page' => (int) Setting::get('posts_per_page', 6),
             'site_logo' => Setting::get('site_logo', ''),

@@ -110,7 +110,7 @@ class VisitorTest extends TestCase
             'visited_at' => now(),
         ]);
 
-        $admin = User::factory()->create(['email' => 'admin@dml-blog.test']);
+        $admin = User::factory()->create(['email' => 'admin@blog.test']);
 
         $this->actingAs($admin)
             ->get(route('admin.visitors.index'))
@@ -167,7 +167,7 @@ class VisitorTest extends TestCase
             'visited_at' => now(),
         ]);
 
-        $admin = User::factory()->create(['email' => 'admin@dml-blog.test']);
+        $admin = User::factory()->create(['email' => 'admin@blog.test']);
 
         $this->actingAs($admin)
             ->get(route('admin.visitors.index'))
@@ -183,7 +183,7 @@ class VisitorTest extends TestCase
     {
         Visit::factory()->count(3)->create();
 
-        $admin = User::factory()->create(['email' => 'admin@dml-blog.test']);
+        $admin = User::factory()->create(['email' => 'admin@blog.test']);
 
         $this->actingAs($admin)
             ->delete(route('admin.visitors.clear'))
@@ -203,7 +203,7 @@ class VisitorTest extends TestCase
             'visited_at' => now()->subDays(3),
         ]);
 
-        $admin = User::factory()->create(['email' => 'admin@dml-blog.test']);
+        $admin = User::factory()->create(['email' => 'admin@blog.test']);
 
         $this->actingAs($admin)
             ->get(route('admin.visitors.index', ['page' => 2]))

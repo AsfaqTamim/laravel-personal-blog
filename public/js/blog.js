@@ -1,5 +1,5 @@
 /**
- * DML Blog — infinite scroll, skeleton loading & reveal animations
+ * Personal Blog — infinite scroll, skeleton loading & reveal animations
  * (vanilla JS, no dependencies).
  */
 (function () {
